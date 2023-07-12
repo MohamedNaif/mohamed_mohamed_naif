@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
+import 'category_screen.dart';
+import 'q-screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -160,6 +164,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState!.save();
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            CategoryScreen()));
                                 // TODO: Perform login logic
                               }
                             },

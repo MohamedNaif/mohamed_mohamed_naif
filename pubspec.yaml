@@ -1,4 +1,4 @@
-name: quiz_app
+name: flutter_app
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  google_fonts: ^4.0.4
   flutter:
     sdk: flutter
 
@@ -58,7 +59,10 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - lib\assets\images\61dbfa2083f0fb33e401a433_finger-printsvg.jpeg
+    - lib/images/pngtree-modern-double-color-futuristic-neon-background-image_351866.jpg
+    - lib/images/6733615-middle.png
+    - lib/images/istockphoto-1290210769-612x612.jpg
+    - lib/images/pngtree-quiz-clipart-design-png-image_6577600.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
