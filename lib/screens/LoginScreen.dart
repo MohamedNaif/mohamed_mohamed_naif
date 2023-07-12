@@ -20,23 +20,6 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // Center(
-          //   child: SizedBox(
-          //     height: 150,
-          //     width: 150,
-          //     child: Image.network(
-          //       AppImg.img2, // replace with the URL of your image
-          //       fit: BoxFit.cover,
-          //     ),
-          //   ),
-          // ),
-          // Image.network(
-          //   AppImg.img, // replace with the URL of your image
-          //   fit: BoxFit.cover,
-          //   height: 150,
-          //   width: 150,
-
-          // ),
           Container(
             padding: EdgeInsets.all(16.0),
             child: Align(
@@ -109,30 +92,16 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (value!.isEmpty) {
                                 return 'Please enter your username';
                               }
-                              return null;
-                            },
-                            onSaved: (value) {
-                              _username = value!;
-                            },
-                          ),
-                          SizedBox(height: 15),
-                          TextFormField(
-                            decoration: InputDecoration(
-                              hintText: 'Password',
-                              prefixIcon: Icon(Icons.lock),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                            ),
-                            obscureText: true,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter your password';
+                              if (!RegExp(r'^[A-Z]').hasMatch(value)) {
+                                return 'Username must start with an uppercase letter';
+                              }
+                              if (value.length < 10) {
+                                return 'Username must be at least 10 characters long';
                               }
                               return null;
                             },
                             onSaved: (value) {
-                              _password = value!;
+                              _username = value!;
                             },
                           ),
                           SizedBox(height: 15),

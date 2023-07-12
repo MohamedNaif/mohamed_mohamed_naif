@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/start_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'LoginScreen.dart';
@@ -38,7 +39,7 @@ class _score_screenState extends State<score_screen>
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => LoginScreen()),
+              MaterialPageRoute(builder: (context) => StartScreen()),
             );
           },
         ),
@@ -70,11 +71,14 @@ class _score_screenState extends State<score_screen>
               height: 100,
             ),
             Center(
-              child: Text(
-                'Hello Mohamed your score is 10/10',
-                style: GoogleFonts.pacifico(
-                  color: Colors.black,
-                  fontSize: 32,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Hello Mohamed your score is 10/10',
+                  style: GoogleFonts.pacifico(
+                    color: Colors.black,
+                    fontSize: 32,
+                  ),
                 ),
               ),
             ),
@@ -85,7 +89,7 @@ class _score_screenState extends State<score_screen>
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                  MaterialPageRoute(builder: (context) => StartScreen()),
                 );
               },
               style: ElevatedButton.styleFrom(

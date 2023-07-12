@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/start_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'LoginScreen.dart';
-import 'category_screen.dart';
-import 'q-screen.dart';
-import 'start_screen.dart';
 
 void main() {
   runApp(MyApp());
