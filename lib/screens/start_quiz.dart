@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/q-screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'LoginScreen.dart';
 
-class StartScreen extends StatelessWidget {
-  const StartScreen({super.key});
+class start_quiz extends StatelessWidget {
+  const start_quiz({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +14,10 @@ class StartScreen extends StatelessWidget {
           backgroundColor: Color(0xffb388eb),
           body: Container(
             padding: EdgeInsets.symmetric(horizontal: 30, vertical: 40),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
-                  'lib/images/pngtree-modern-double-color-futuristic-neon-background-image_351866.jpg',
+                  'lib/images/7585.jpg',
                 ),
                 fit: BoxFit.cover,
               ),
@@ -24,15 +25,15 @@ class StartScreen extends StatelessWidget {
             child: Center(
               child: Column(
                 children: [
-                  CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 103,
-                    child: CircleAvatar(
-                      radius: 100,
-                      backgroundImage: AssetImage(
-                          'lib/images/istockphoto-1290210769-612x612.jpg'),
-                    ),
-                  ),
+                  // CircleAvatar(
+                  //   backgroundColor: Colors.white,
+                  //   radius: 103,
+                  //   child: CircleAvatar(
+                  //     radius: 100,
+                  //     backgroundImage: AssetImage(
+                  //         'lib/images/istockphoto-1290210769-612x612.jpg'),
+                  //   ),
+                  // ),
                   SizedBox(
                     height: 20,
                   ),
@@ -55,7 +56,10 @@ class StartScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                        MaterialPageRoute(
+                            builder: (context) => questionscreen(
+                                  questionsList: [],
+                                )),
                       );
                     },
                     style: ElevatedButton.styleFrom(
@@ -67,7 +71,7 @@ class StartScreen extends StatelessWidget {
                     ),
                     // color: Colors.white,
                     child: Text(
-                      'Get Started',
+                      'Start Quiz ',
                       style: TextStyle(
                         fontSize: 18.0,
                         color: Color.fromARGB(255, 255, 255, 255),

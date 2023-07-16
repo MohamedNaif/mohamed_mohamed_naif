@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import '../Global/global_style.dart';
 import '../screens/score_screen.dart';
 
 class categorybtn extends StatelessWidget {
   final String testname;
   final Function()? onTab_func;
+  final Function()? themColor;
 
-  const categorybtn({super.key, required this.testname, this.onTab_func});
+  const categorybtn(
+      {super.key, required this.testname, this.onTab_func, this.themColor});
 
   @override
   Widget build(BuildContext context) {

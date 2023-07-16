@@ -63,6 +63,9 @@ flutter:
     - lib/images/6733615-middle.png
     - lib/images/istockphoto-1290210769-612x612.jpg
     - lib/images/pngtree-quiz-clipart-design-png-image_6577600.png
+    - lib/images/7585.jpg
+    - lib/assets/images/background.png
+    - lib/assets/images/background-2.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
