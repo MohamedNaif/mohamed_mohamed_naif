@@ -4,17 +4,19 @@ import '../shared/CategoryButton.dart';
 import '../shared/questionsbtn.dart';
 import 'LoginScreen.dart';
 import 'score_screen.dart';
+import '../Global/global_style.dart';
 
 class questionscreen extends StatefulWidget {
   final Color? themeColor;
   final String? testName;
   final List questionsList;
-
-  questionscreen({
+  final LinearGradient quizcolor ;
+  const questionscreen({
     Key? key,
     this.themeColor,
     this.testName,
     required this.questionsList,
+    required this.quizcolor
   }) : super(key: key);
 
   @override
@@ -26,12 +28,12 @@ class _QuestionsScreenState extends State<questionscreen> {
   int score = 0;
   int _remainingTime = 30; // initial time in seconds
   late Timer _timer; // timer to update the remaining time
-
+  String degree = "";
   @override
   void initState() {
     super.initState();
     // start the timer when the widget is initialized
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         if (_remainingTime > 0) {
           _remainingTime--;
@@ -53,12 +55,16 @@ class _QuestionsScreenState extends State<questionscreen> {
   void _goToNextQuestion() {
     if (index == widget.questionsList.length - 1) {
       // when we reach the last question, show the score screen
+      _timer.cancel();
+      if ( score < 0.5 * (index + 1))  {degree = "Failed" ;}
+      else {degree = "Congratulation" ;}
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => ScoreScreen(
             index: index,
             score: score,
+            degree: degree,
           ),
         ),
       );
@@ -77,7 +83,7 @@ class _QuestionsScreenState extends State<questionscreen> {
     String secondsStr = remainingSeconds.toString().padLeft(2, '0');
     return '$minutesStr:$secondsStr';
   }
-
+  
   Widget _buildTimer() {
     return Container(
       decoration: BoxDecoration(
@@ -88,7 +94,7 @@ class _QuestionsScreenState extends State<questionscreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.timer,
             color: Colors.white,
             size: 24,
@@ -109,6 +115,8 @@ class _QuestionsScreenState extends State<questionscreen> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenwidth = MediaQuery.of(context).size.width ; 
+    
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 100,
@@ -117,7 +125,7 @@ class _QuestionsScreenState extends State<questionscreen> {
         leading: Center(child: Text(widget.testName!)),
         title: Column(
           children: [
-            Text("Question No:"),
+            const Text("Question No:"),
             Text("${index + 1}/${widget.questionsList.length}"),
           ],
         ),
@@ -132,18 +140,8 @@ class _QuestionsScreenState extends State<questionscreen> {
         ],
       ),
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color.fromARGB(255, 18, 43, 101),
-              Color.fromARGB(255, 30, 71, 117),
-              Color.fromARGB(255, 68, 98, 138),
-              Color(0xFF398AE5),
-            ],
-            stops: [0.1, 0.4, 0.7, 0.9],
-          ),
+        decoration:  BoxDecoration(
+          gradient: widget.quizcolor
         ),
         child: Padding(
           padding: const EdgeInsets.all(18.0),
@@ -185,33 +183,26 @@ class _QuestionsScreenState extends State<questionscreen> {
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      for (int i = 0;
-                          i <
-                              (widget.questionsList[index]["answers"] as List)
-                                  .length;
-                          i++)
+                      for (int i = 0; i < (widget.questionsList[index]["answers"] as List).length; i++)
                         GestureDetector(
                           onTap: () {
-                            score = score +
-                                widget.questionsList[index]["answers"][i]
-                                    ["score"] as int;
+                            score = score + widget.questionsList[index]["answers"][i]["score"] as int;
                             _goToNextQuestion();
                           },
                           child: Container(
-                            height: 50,
-                            width: MediaQuery.of(context).size.width * 0.45,
+                            
+                            width: screenwidth * 0.45,
                             margin: const EdgeInsets.symmetric(vertical: 8.0),
                             decoration: BoxDecoration(
-                              color: Theme.of(context).accentColor,
+                              color: Theme.of(context).accentColor ,
                               borderRadius: BorderRadius.circular(8.0),
                             ),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16.0, vertical: 16.0),
+                            padding: const EdgeInsets.all(8),
                             child: Center(
                               child: Text(
-                                widget.questionsList[index]["answers"][i]
-                                    ["ans"],
+                                widget.questionsList[index]["answers"][i]["ans"],
                                 style: const TextStyle(
                                   fontSize: 18.0,
                                 ),

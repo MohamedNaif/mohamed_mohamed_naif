@@ -10,10 +10,10 @@ class StartScreen extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          backgroundColor: Color(0xffb388eb),
+          backgroundColor: const Color(0xffb388eb),
           body: Container(
-            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 40),
-            decoration: BoxDecoration(
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 40),
+            decoration: const  BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
                   'lib/images/pngtree-modern-double-color-futuristic-neon-background-image_351866.jpg',
@@ -24,7 +24,7 @@ class StartScreen extends StatelessWidget {
             child: Center(
               child: Column(
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: 103,
                     child: CircleAvatar(
@@ -33,7 +33,7 @@ class StartScreen extends StatelessWidget {
                           'lib/images/istockphoto-1290210769-612x612.jpg'),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Text(
@@ -50,23 +50,23 @@ class StartScreen extends StatelessWidget {
                       fontSize: 18,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                        MaterialPageRoute(builder: (context) => const  LoginScreen()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Color.fromARGB(255, 88, 66, 187),
-                      minimumSize: Size(60, 60),
+                      primary: const Color.fromARGB(255, 88, 66, 187),
+                      minimumSize: const Size(60, 60),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
                     // color: Colors.white,
-                    child: Text(
+                    child: const  Text(
                       'Get Started',
                       style: TextStyle(
                         fontSize: 18.0,

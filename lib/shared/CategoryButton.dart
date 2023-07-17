@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../Global/global_style.dart';
-import '../screens/score_screen.dart';
+// import '../Global/global_style.dart';
+// import '../screens/score_screen.dart';
 
 class categorybtn extends StatelessWidget {
   final String testname;

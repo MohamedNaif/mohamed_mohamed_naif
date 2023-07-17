@@ -1,29 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Global/global_style.dart';
 import 'package:flutter_app/screens/LoginScreen.dart';
 import 'package:flutter_app/screens/start_screen.dart';
 
 class ScoreScreen extends StatelessWidget {
   final int index;
   final int score;
-  const ScoreScreen({Key? key, required this.index, required this.score})
+  final String degree ; 
+  const ScoreScreen({Key? key, required this.index, required this.score , required this.degree})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color.fromARGB(255, 18, 43, 101),
-              Color.fromARGB(255, 30, 71, 117),
-              Color.fromARGB(255, 68, 98, 138),
-              Color(0xFF398AE5),
-            ],
-            stops: [0.1, 0.4, 0.7, 0.9],
-          ),
+        decoration: const BoxDecoration(
+          gradient: gradientColor1 ,
         ),
         // margin: const EdgeInsets.all(30),
         child: Padding(
@@ -32,16 +24,19 @@ class ScoreScreen extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                Text(degree ,
+                style: const  TextStyle(fontSize: 34 , fontWeight: FontWeight.bold ,
+                color: Colors.black ),),
                 Text(
                   userNameTextEditingControllrt.text,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
-                    color: Theme.of(context).primaryColor,
+                    color: Colors.white,
                   ),
                 ),
                 const SizedBox(height: 16),
-                Text(
+                const Text(
                   'Your Score is',
                   style: TextStyle(
                     fontSize: 20,
@@ -52,15 +47,17 @@ class ScoreScreen extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   '$score / ${index + 1}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 48,
                     fontWeight: FontWeight.bold,
-                    color: Theme.of(context).primaryColor,
+                    color: Colors.white,
                   ),
                 ),
                 const SizedBox(height: 32),
                 ElevatedButton(
                   onPressed: () {
+                    // Clear the username data
+                    userNameTextEditingControllrt.clear();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -68,19 +65,21 @@ class ScoreScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Text(
-                    'Play Again',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  
                   style: ElevatedButton.styleFrom(
                     primary: Theme.of(context).primaryColor,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 32, vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: const Text(
+                    'Play Again',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color : Colors.black 
                     ),
                   ),
                 ),

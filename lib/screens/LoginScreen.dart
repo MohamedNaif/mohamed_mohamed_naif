@@ -4,8 +4,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'category_screen.dart';
 import 'q-screen.dart';
 
-TextEditingController userNameTextEditingControllrt =
-    TextEditingController(); // global
+TextEditingController userNameTextEditingControllrt = TextEditingController(); // global
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -36,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 400,
                     width: width,
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage(
                                   'lib/assets/images/background.png'),
@@ -46,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 400,
                     width: width + 20,
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage(
                                   'lib/assets/images/background-2.png'),
@@ -59,8 +58,8 @@ class _LoginScreenState extends State<LoginScreen> {
             alignment: Alignment.bottomCenter,
             child: Container(
               height: MediaQuery.of(context).size.height * 0.45,
-              padding: EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.all(16.0),
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20),
@@ -73,29 +72,30 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         'Login',
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       TextFormField(
-                        // controller: userNameTextEditingControllrt,
+                        controller: userNameTextEditingControllrt,
                         decoration: InputDecoration(
                           hintText: 'Username',
-                          prefixIcon: Icon(Icons.person),
+                          
+                          prefixIcon: const Icon(Icons.person),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(20),
                           ),
                         ),
-                        controller: userNameTextEditingControllrt,
+                        
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Please enter your username';
                           }
-                          if (!RegExp(r'^[A-Z]').hasMatch(value)) {
+                          if ( value[0] != value[0].toUpperCase()) {
                             return 'Username must start with an uppercase letter';
                           }
                           if (value.length < 10) {
@@ -104,13 +104,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           TextButton(
                             onPressed: () {},
-                            child: Text(
+                            child: const Text(
                               'New to Quiz?',
                               style: TextStyle(
                                 color: Color.fromARGB(255, 196, 210, 222),
@@ -119,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           TextButton(
                             onPressed: () {},
-                            child: Text(
+                            child: const Text(
                               'Register?',
                               style: TextStyle(
                                 color: Color.fromARGB(255, 146, 30, 214),
@@ -128,21 +128,21 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       ElevatedButton(
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            _formKey.currentState!.save();
+                          if ( _formKey.currentState!.validate() ) {
+                            
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => CategoryScreen()));
+                                    builder: (context) =>  CategoryScreen()));
                             // TODO: Perform login logic
                           }
                         },
-                        child: Text('LOGIN'),
+                        child: const Text('LOGIN'),
                         style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 73, 12, 147),
+                          primary: const Color.fromARGB(255, 73, 12, 147),
                           minimumSize: Size(
                               MediaQuery.of(context).size.width * 0.45, 50),
                           shape: RoundedRectangleBorder(
@@ -150,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -164,12 +164,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                   });
                                 },
                               ),
-                              Text('Remember Me'),
+                              const Text('Remember Me'),
                             ],
                           ),
                           TextButton(
                             onPressed: () {},
-                            child: Text(
+                            child: const Text(
                               'Forgot Password?',
                               style: TextStyle(
                                 color: Color.fromARGB(255, 148, 26, 193),
