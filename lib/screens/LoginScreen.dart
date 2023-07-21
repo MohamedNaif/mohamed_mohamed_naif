@@ -23,41 +23,43 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Stack(
-        children: [
-          Container(
-            height: 400,
-            child: Stack(
-              children: [
-                Positioned(
-                    top: -40,
-                    height: 400,
-                    width: width,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(
-                                  'lib/assets/images/background.png'),
-                              fit: BoxFit.fill)),
-                    )),
-                Positioned(
-                    height: 400,
-                    width: width + 20,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(
-                                  'lib/assets/images/background-2.png'),
-                              fit: BoxFit.fill)),
-                    ))
-              ],
+      // resizeToAvoidBottomInset: false,
+      body: SafeArea(
+        child: Stack(
+          alignment: Alignment.bottomCenter ,
+          children: [
+            Container(
+              // height: 400,
+              width:  MediaQuery.of(context).size.width,
+              child: Stack(
+                children: [
+                  Positioned(
+                      top: -40,
+                      height: 400,
+                      width: width,
+                      child: Container(
+                        decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(
+                                    'lib/assets/images/background.png'),
+                                fit: BoxFit.fill)),
+                      )),
+                  Positioned(
+                      height: 400,
+                      width: width + 20,
+                      child: Container(
+                        decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(
+                                    'lib/assets/images/background-2.png'),
+                                fit: BoxFit.fill)),
+                      ))
+                ],
+              ),
             ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
+            Container(
               height: MediaQuery.of(context).size.height * 0.45,
+              width: MediaQuery.of(context).size.width,
               padding: const EdgeInsets.all(16.0),
               decoration: const BoxDecoration(
                 color: Colors.white,
@@ -183,8 +185,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

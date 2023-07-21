@@ -58,11 +58,12 @@ class ScoreScreen extends StatelessWidget {
                   onPressed: () {
                     // Clear the username data
                     userNameTextEditingControllrt.clear();
-                    Navigator.push(
+                    Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const StartScreen(),
                       ),
+                      (Route<dynamic> route) => false,
                     );
                   },
                   

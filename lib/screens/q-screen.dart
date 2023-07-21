@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/start_screen.dart';
 import '../shared/CategoryButton.dart';
 import '../shared/questionsbtn.dart';
 import 'LoginScreen.dart';
@@ -58,7 +59,7 @@ class _QuestionsScreenState extends State<questionscreen> {
       _timer.cancel();
       if ( score < 0.5 * (index + 1))  {degree = "Failed" ;}
       else {degree = "Congratulation" ;}
-      Navigator.push(
+      Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
           builder: (context) => ScoreScreen(
@@ -67,6 +68,7 @@ class _QuestionsScreenState extends State<questionscreen> {
             degree: degree,
           ),
         ),
+        (Route<dynamic> route) => false,
       );
     } else {
       setState(() {
@@ -117,104 +119,111 @@ class _QuestionsScreenState extends State<questionscreen> {
   Widget build(BuildContext context) {
     final double screenwidth = MediaQuery.of(context).size.width ; 
     
-    return Scaffold(
-      appBar: AppBar(
-        leadingWidth: 100,
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-        leading: Center(child: Text(widget.testName!)),
-        title: Column(
-          children: [
-            const Text("Question No:"),
-            Text("${index + 1}/${widget.questionsList.length}"),
+    return WillPopScope(
+      onWillPop: () async{
+        userNameTextEditingControllrt.clear() ;
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const StartScreen())) ;
+        return false ;
+      }, 
+      child: Scaffold(
+        appBar: AppBar(
+          leadingWidth: 100,
+          centerTitle: true,
+          automaticallyImplyLeading: false,
+          leading: Center(child: Text(widget.testName!)),
+          title: Column(
+            children: [
+              const Text("Question No:"),
+              Text("${index + 1}/${widget.questionsList.length}"),
+            ],
+          ),
+          actions: const [
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.school,
+                color: Color.fromARGB(255, 187, 175, 195),
+              ),
+            )
           ],
         ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Icon(
-              Icons.school,
-              color: Color.fromARGB(255, 187, 175, 195),
-            ),
-          )
-        ],
-      ),
-      body: Container(
-        decoration:  BoxDecoration(
-          gradient: widget.quizcolor
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(18.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    "Question:",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+        body: Container(
+          decoration:  BoxDecoration(
+            gradient: widget.quizcolor
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Question:",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
+                    _buildTimer(),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  widget.questionsList[index]["question"],
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
                   ),
-                  _buildTimer(),
-                ],
-              ),
-              const SizedBox(height: 8),
-              Text(
-                widget.questionsList[index]["question"],
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
                 ),
-              ),
-              const SizedBox(height: 24),
-              const Text(
-                "Answers:",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                const SizedBox(height: 24),
+                const Text(
+                  "Answers:",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 8),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      for (int i = 0; i < (widget.questionsList[index]["answers"] as List).length; i++)
-                        GestureDetector(
-                          onTap: () {
-                            score = score + widget.questionsList[index]["answers"][i]["score"] as int;
-                            _goToNextQuestion();
-                          },
-                          child: Container(
-                            
-                            width: screenwidth * 0.45,
-                            margin: const EdgeInsets.symmetric(vertical: 8.0),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).accentColor ,
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            padding: const EdgeInsets.all(8),
-                            child: Center(
-                              child: Text(
-                                widget.questionsList[index]["answers"][i]["ans"],
-                                style: const TextStyle(
-                                  fontSize: 18.0,
+                const SizedBox(height: 8),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        for (int i = 0; i < (widget.questionsList[index]["answers"] as List).length; i++)
+                          GestureDetector(
+                            onTap: () {
+                              score = score + widget.questionsList[index]["answers"][i]["score"] as int;
+                              _goToNextQuestion();
+                            },
+                            child: Container(
+                              
+                              width: screenwidth * 0.45,
+                              margin: const EdgeInsets.symmetric(vertical: 8.0),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).accentColor ,
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              padding: const EdgeInsets.all(8),
+                              child: Center(
+                                child: Text(
+                                  widget.questionsList[index]["answers"][i]["ans"],
+                                  style: const TextStyle(
+                                    fontSize: 18.0,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
